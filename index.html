@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Anubhuv Kumar · Senior Software Engineer · E-commerce, OMS &amp; Supply Chain</title>
+  <meta name="description" content="Anubhuv Kumar — Senior Software Engineer (5+ yrs) building Order Management, Warehouse Management, 3PL integrations and order-routing systems with Java, Spring Boot, Kafka and MongoDB." />
+  <meta name="theme-color" content="#0a0614" />
+  <meta property="og:title" content="Anubhuv Kumar · E-commerce Backend Engineer" />
+  <meta property="og:description" content="OMS, WMS, 3PL & order routing at scale — Java, Spring Boot, Kafka, MongoDB." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/core.css" />
+  <style>
+    :root {
+      --bg: #0a0614; --text: #f4f0ff; --muted: #a69cc4;
+      --accent: #ff7ab6; --accent2: #8b6cff; --accent3: #22d3ee; --on-accent: #ffffff;
+      --card: rgba(255, 255, 255, .05); --border: rgba(255, 255, 255, .1); --ok: #34d399;
+      --font-head: 'Outfit', sans-serif; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+    }
+    .tracker { width: min(430px, 90vw); padding: 30px 28px 28px; border-radius: 26px; margin-top: 130px;
+      box-shadow: 0 40px 80px -20px rgba(0,0,0,.75), 0 0 60px -12px rgba(255,122,182,.45); }
+    .box-stage { position: absolute; left: 50%; top: -160px; width: 140px; height: 140px; margin-left: -70px; perspective: 800px; }
+    .box3d { width: 140px; height: 140px; position: relative; transform-style: preserve-3d; animation: boxSpin 14s linear infinite; }
+    .box3d > div { position: absolute; inset: 0; background: linear-gradient(135deg, #f6a25a, #c8742f); border: 1px solid rgba(60,20,0,.35); box-shadow: inset 0 0 30px rgba(80,30,0,.35); }
+    .box3d > div::after { content: ""; position: absolute; left: 44%; width: 12%; top: 0; bottom: 0; background: rgba(255,236,200,.75); }
+    .box3d .f { transform: translateZ(70px); } .box3d .b { transform: rotateY(180deg) translateZ(70px); }
+    .box3d .r { transform: rotateY(90deg) translateZ(70px); } .box3d .l { transform: rotateY(-90deg) translateZ(70px); }
+    .box3d .t { transform: rotateX(90deg) translateZ(70px); } .box3d .d { transform: rotateX(-90deg) translateZ(70px); }
+    .box3d .f span { position: absolute; left: 12px; bottom: 14px; z-index: 2; padding: 4px 7px; background: #fff; color: #222; font: 700 .6rem var(--font-mono); border-radius: 4px; }
+    @keyframes boxSpin { from { transform: rotateX(-22deg) rotateY(0); } to { transform: rotateX(-22deg) rotateY(360deg); } }
+    .trk-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; font-family: var(--font-mono); font-size: .78rem; color: var(--muted); }
+    .trk-head b { color: var(--text); font-size: .95rem; font-family: var(--font-head); }
+    .steps { position: relative; display: grid; gap: 16px; }
+    .steps::before { content: ""; position: absolute; left: 13px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+    .steps::after { content: ""; position: absolute; left: 13px; top: 6px; width: 2px; height: 0; background: linear-gradient(var(--accent), var(--accent2)); box-shadow: 0 0 10px var(--accent); animation: trk 6s ease-in-out infinite; }
+    @keyframes trk { 0% { height: 0; } 70%, 100% { height: calc(100% - 12px); } }
+    .step { position: relative; display: flex; align-items: center; gap: 14px; font-size: .92rem; z-index: 1; }
+    .step i { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: .8rem; background: var(--bg); border: 2px solid var(--accent); animation: stepOn 6s infinite; animation-delay: calc(var(--i) * .8s); }
+    .step small { margin-left: auto; font-family: var(--font-mono); color: var(--muted); font-size: .72rem; }
+    @keyframes stepOn { 0%, 8% { background: var(--bg); box-shadow: none; } 14%, 90% { background: var(--accent); box-shadow: 0 0 16px var(--accent); } 100% { background: var(--bg); } }
+    .eta { margin-top: 22px; padding: 14px 16px; border-radius: 14px; display: flex; justify-content: space-between; background: color-mix(in srgb, var(--accent2) 16%, transparent); font-size: .85rem; }
+    .eta b { color: var(--ok); }
+  </style>
+  <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }</script>
+</head>
+<body>
+  <div id="preloader"><div class="loader-wrap"><div class="loader-cube"><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="loader-text">PACKING ORDERS…</div></div></div>
+  <div id="progress"></div>
+  <div class="bg-fallback"></div>
+  <canvas id="bg3d" aria-hidden="true"></canvas>
+  <div class="grid-overlay"></div>
+
+  <header class="nav">
+    <a href="#home" class="logo"><span class="logo-mark">AK</span><span>Anubhuv<span class="grad">.shop</span></span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#commerce">Commerce</a>
+      <a href="#skills">Skills</a>
+      <a href="#profiles">Profiles</a>
+      <a href="#contact">Contact</a>
+      <a href="assets/Anubhuv_Kumar_SDE_2_Ecommerce_Resume.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-sm nav-cta"><svg class="icon"><use href="#i-download"/></svg>Resume</a>
+    </nav>
+    <button class="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div>
+        <div class="badge"><span class="pulse"></span>Senior Software Engineer @ Omnissa · Open to E-commerce roles</div>
+        <h1><span class="hi">// hello, I'm</span><span class="split grad">Anubhuv Kumar</span></h1>
+        <div class="typed-line" data-typed='["Order Management Systems","Warehouse Automation (WMS)","Smart Order Routing","3PL & Shipment Integrations","Inventory Reconciliation"]'><span class="prefix">$ ship </span><span class="typed"></span><span class="caret"></span></div>
+        <p class="hero-sub">Backend engineer with <b>5+ years</b> powering <b>D2C &amp; e-commerce supply chains</b> — from checkout to doorstep. I build OMS, WMS, routing and 3PL systems in Java &amp; Spring Boot that made orders <b>40% faster</b> and shipping <b>15% cheaper</b>.</p>
+        <div class="btn-row">
+          <a href="assets/Anubhuv_Kumar_SDE_2_Ecommerce_Resume.pdf" download class="btn btn-primary" data-magnetic><svg class="icon"><use href="#i-download"/></svg>Download E-com Resume</a>
+          <a href="#contact" class="btn btn-ghost" data-magnetic>Let's Talk <svg class="icon"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/anubhuv-kumar-43a9241b1/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a>
+          <a href="https://github.com/anubhav2103" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+          <a href="mailto:anubhuv007@gmail.com" aria-label="Email"><svg class="icon"><use href="#i-mail"/></svg></a>
+          <a href="tel:+918754576548" aria-label="Phone"><svg class="icon"><use href="#i-phone"/></svg></a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="float">
+          <div class="tracker glass tilt" data-tilt="14">
+            <div class="box-stage z3"><div class="box3d"><div class="f"><span>AK-2025 ▮▮▯▮</span></div><div class="b"></div><div class="r"></div><div class="l"></div><div class="t"></div><div class="d"></div></div></div>
+            <div class="trk-head z1"><span>ORDER <b>#ESB-0040</b></span><span>● LIVE</span></div>
+            <div class="steps z2">
+              <div class="step" style="--i:0"><i>✓</i>Order placed<small>OMS</small></div>
+              <div class="step" style="--i:1"><i>✓</i>Smart-routed<small>−15% cost</small></div>
+              <div class="step" style="--i:2"><i>✓</i>Picked &amp; packed<small>WMS</small></div>
+              <div class="step" style="--i:3"><i>✓</i>Weighed &amp; billed<small>Vmeasure</small></div>
+              <div class="step" style="--i:4"><i>✓</i>Shipped via 3PL<small>real-time</small></div>
+            </div>
+            <div class="eta z1"><span>Processing speed</span><b>▲ 40% faster</b></div>
+          </div>
+        </div>
+      </div>
+      <a href="#about" class="scroll-hint" aria-label="Scroll down"><span class="mouse"></span>SCROLL</a>
+    </section>
+
+    <div class="marquee" aria-hidden="true"><div class="marquee-track">
+      <span>Order Management</span><span>Warehouse Management</span><span>GRN &amp; QC</span><span>Order Routing</span><span>3PL Sync</span><span>Inventory Ledger</span><span>B2B Recalls</span><span>Vmeasure</span><span>Kafka</span><span>MongoDB</span>
+      <span>Order Management</span><span>Warehouse Management</span><span>GRN &amp; QC</span><span>Order Routing</span><span>3PL Sync</span><span>Inventory Ledger</span><span>B2B Recalls</span><span>Vmeasure</span><span>Kafka</span><span>MongoDB</span>
+    </div></div>
+
+    <section class="section" style="padding-bottom:40px">
+      <div class="stats">
+        <div class="stat glass tilt" data-tilt="10" data-reveal><div class="num grad" data-count="70" data-suffix="%">0%</div><div class="label">Productivity boost from OMS for Consignment &amp; Inventory</div></div>
+        <div class="stat glass tilt" data-tilt="10" data-reveal style="--d:.08s"><div class="num grad" data-count="40" data-suffix="%">0%</div><div class="label">Faster order processing via smarter routing</div></div>
+        <div class="stat glass tilt" data-tilt="10" data-reveal style="--d:.16s"><div class="num grad" data-count="15" data-suffix="%">0%</div><div class="label">Lower shipping costs</div></div>
+        <div class="stat glass tilt" data-tilt="10" data-reveal style="--d:.24s"><div class="num grad" data-count="73" data-suffix="%">0%</div><div class="label">Better inventory traceability (B2B recalls)</div></div>
+        <div class="stat glass tilt" data-tilt="10" data-reveal style="--d:.32s"><div class="num grad" data-count="50" data-suffix="%">0%</div><div class="label">Fewer stockouts through reconciliation</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">01 // About</div>
+        <h2>From <span class="grad">cart to doorstep</span> — engineered.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text glass" data-reveal="left">
+          <p>👋 Hi, I'm <b>Anubhuv Kumar</b> — a Senior Software Engineer with <b>5+ years</b> building highly scalable microservices in <b>Java, Spring Boot, Hibernate, Kafka &amp; MongoDB</b>.</p>
+          <p>At <b>Eshopbox</b> — a fulfilment platform for India's D2C brands — I led <b>Order Management (OMS)</b> for Consignment &amp; Inventory, engineered <b>Warehouse Management (WMS)</b> automation, integrated <b>GRN with QC</b>, synced shipments with <b>3PL partners in real time</b> and rewrote <b>order-routing</b> to pick faster, cheaper delivery routes.</p>
+          <p>Now at <b>Omnissa (formerly VMware EUC)</b>, I bring that scale to enterprise — modernizing microservices to Spring Boot 4, hardening CI/CD with Wiz, and making automation <b>61% faster</b>.</p>
+        </div>
+        <div class="about-cards">
+          <div class="mini-card glass" data-reveal="right"><div class="ico">🛒</div><h4>Order Management</h4><p>Consignment &amp; inventory OMS modules with Java + Hibernate.</p></div>
+          <div class="mini-card glass" data-reveal="right" style="--d:.1s"><div class="ico">🏭</div><h4>Warehouse Ops</h4><p>WMS workflows, GRN, QC inspection &amp; inventory movement.</p></div>
+          <div class="mini-card glass" data-reveal="right" style="--d:.2s"><div class="ico">🚚</div><h4>Logistics</h4><p>3PL sync, Vmeasure weights, slab-based shipping charges.</p></div>
+          <div class="mini-card glass" data-reveal="right" style="--d:.3s"><div class="ico">📊</div><h4>Inventory Truth</h4><p>Ledger exports, reconciliation &amp; cross-system sync.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">02 // Experience</div>
+        <h2>Where I've <span class="grad">delivered.</span></h2>
+        <p>Hover a company name for a quick preview — click to visit.</p>
+      </div>
+      <div class="timeline"><div class="beam"></div>
+
+        <div class="tl-item" data-reveal>
+          <article class="tl-card glass">
+            <div class="tl-top">
+              <div>
+                <h3><a class="co-link" href="https://www.linkedin.com/company/omnissa/home/" target="_blank" rel="noopener"><span class="co-name">Omnissa</span><svg class="icon"><use href="#i-arrow"/></svg>
+                  <span class="co-pop"><strong><span class="co-logo">O</span>Omnissa</strong>Formerly VMware End-User Computing — the digital-workspace platform company.<span class="co-url">linkedin.com/company/omnissa ↗</span></span></a> <small style="color:var(--muted);font-weight:500">(formerly VMware EUC)</small></h3>
+                <div class="tl-role">Senior Software Engineer · MTS-3</div>
+              </div>
+              <div class="chips"><span class="chip now">● Dec 2025 – Present</span><span class="chip"><svg class="icon"><use href="#i-pin"/></svg>Bengaluru</span></div>
+            </div>
+            <ul class="bullets">
+              <li>Spearheading microservices modernization to <b>Spring Boot 4 &amp; Spring Framework 7</b>, resolving <b>Jackson 2 → 3</b> compatibility across Java services.</li>
+              <li>Optimized nightly regression with parallel execution &amp; scenario isolation — targeting <b>61% faster runs (155 → 60 min)</b> and <b>83% faster failure diagnosis</b>.</li>
+              <li>Integrated <b>Wiz CLI</b> into CI for container vulnerability &amp; secrets scanning, targeting <b>100% scan coverage</b>.</li>
+              <li>Driving <b>MongoDB migration</b> &amp; upgrades, targeting <b>90% fewer</b> migration-related issues.</li>
+            </ul>
+            <div class="chips tech-row"><span class="chip">Java</span><span class="chip">Spring Boot 4</span><span class="chip">Kafka</span><span class="chip">MongoDB</span><span class="chip">Redis</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Helm</span><span class="chip">Jenkins</span><span class="chip">Wiz</span></div>
+          </article>
+        </div>
+
+        <div class="tl-item" data-reveal>
+          <article class="tl-card glass">
+            <div class="tl-top">
+              <div>
+                <h3><a class="co-link" href="https://www.eshopbox.com/" target="_blank" rel="noopener"><span class="co-name">Eshopbox</span><svg class="icon"><use href="#i-arrow"/></svg>
+                  <span class="co-pop"><strong><span class="co-logo">E</span>Eshopbox</strong>Tech-enabled e-commerce fulfilment &amp; logistics platform powering D2C brands across India.<span class="co-url">eshopbox.com ↗</span></span></a></h3>
+                <div class="tl-role">Backend Engineer · 2 yrs 4 mos · promoted to SDE-2</div>
+              </div>
+              <div class="chips"><span class="chip">Aug 2023 – Nov 2025</span><span class="chip"><svg class="icon"><use href="#i-pin"/></svg>Gurugram</span></div>
+            </div>
+            <div class="tl-sub" style="margin-top:0;padding-top:0;border:0">
+              <h4>SDE-2 (Back End Developer) <span class="chip">Dec 2024 – Nov 2025</span></h4>
+              <ul class="bullets">
+                <li>Designed the <b>Vmeasure API</b> integration with the shipment-manifest workflow to automate dimensional-weight &amp; slab-based charges — <b>35% better billing accuracy</b>.</li>
+                <li>Streamlined shipment data exchange with <b>3PL partners</b> for real-time sync — <b>40% less manual intervention</b>.</li>
+                <li>Optimized <b>order-routing algorithms</b> — <b>40% faster</b> order processing and <b>15% lower</b> shipping costs.</li>
+                <li>Caching + async processing cut average API latency by <b>30%</b>; rate-slab validation with logistics teams lifted invoice accuracy <b>25%</b>.</li>
+                <li>Built <b>JWT-based RBAC</b> for export APIs with brand-wise access control (<b>−40%</b> unauthorized access) and token refresh flows.</li>
+                <li>Architected a <b>Kafka-driven Wallet microservice</b> for automated processing-fee deductions — <b>85% less</b> manual reconciliation.</li>
+              </ul>
+            </div>
+            <div class="tl-sub">
+              <h4>SDE-1 (Back End Developer) <span class="chip">Aug 2023 – Nov 2024</span></h4>
+              <ul class="bullets">
+                <li>Led <b>Order Management System (OMS)</b> modules for Consignment &amp; Inventory with Java &amp; Hibernate — <b>70% productivity</b> gain and <b>65% better data accuracy</b>.</li>
+                <li>Engineered <b>WMS automation workflows</b>, improving team productivity by <b>60%</b> through optimized inventory movement.</li>
+                <li>Integrated <b>Goods Receipt Note (GRN)</b> with quality-control &amp; inspection — <b>70% more efficient</b> receiving.</li>
+              </ul>
+              <div class="collapsible" id="eb1-more"><div><ul class="bullets">
+                <li>Enhanced <b>B2B product-recall</b> features — <b>73% better</b> inventory traceability.</li>
+                <li>Built a <b>weight-dimension verification</b> system to curb fraud &amp; discrepancies — <b>60% more</b> trust in inventory data.</li>
+                <li>Inventory-ledger export with <b>Java, RabbitMQ &amp; MongoDB</b> — <b>60% more accurate</b> financial reporting, <b>70% more transparent</b> summaries.</li>
+                <li>Streamlined <b>inventory reconciliation</b> &amp; cross-system sync — <b>60% less</b> manual effort, <b>90% fewer</b> data-entry errors, <b>50% fewer</b> stockouts.</li>
+                <li>Tuned Hibernate interactions to cut DB load by <b>30%</b>; automated the <b>Inward Export Report</b> to remove manual client reporting.</li>
+              </ul></div></div>
+              <button class="more-toggle" aria-expanded="false" aria-controls="eb1-more" data-label="+ show more impact">+ show more impact</button>
+            </div>
+            <div class="chips tech-row"><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">Hibernate</span><span class="chip">Kafka</span><span class="chip">RabbitMQ</span><span class="chip">MongoDB</span><span class="chip">MySQL</span><span class="chip">GCP</span><span class="chip">AWS S3</span><span class="chip">Redis</span></div>
+          </article>
+        </div>
+
+        <div class="tl-item" data-reveal>
+          <article class="tl-card glass">
+            <div class="tl-top">
+              <div>
+                <h3><a class="co-link" href="https://www.csgi.com/" target="_blank" rel="noopener"><span class="co-name">CSG International</span><svg class="icon"><use href="#i-arrow"/></svg>
+                  <span class="co-pop"><strong><span class="co-logo">C</span>CSG International</strong>Global SaaS leader in revenue management, billing &amp; payments for telecom and enterprise.<span class="co-url">csgi.com ↗</span></span></a></h3>
+                <div class="tl-role">Software Development Engineer I · SDE Grad Intern</div>
+              </div>
+              <div class="chips"><span class="chip">Jan 2022 – Aug 2023</span><span class="chip"><svg class="icon"><use href="#i-pin"/></svg>Bengaluru</span></div>
+            </div>
+            <ul class="bullets">
+              <li>Engineered <b>billing, rating &amp; integration</b> modules for telecom clients — <b>25% better billing accuracy</b>.</li>
+              <li>Introduced <b>load balancing &amp; horizontal scaling</b> for microservices — <b>65% better</b> availability under peak load; Kafka throughput up <b>50%</b>.</li>
+              <li>Integrated <b>Razorpay Payment APIs</b> — PCI-compliant, fault-tolerant, <b>60% higher</b> transaction success.</li>
+              <li>Refactored legacy Java with Streams &amp; Lambdas — <b>70% faster</b> execution.</li>
+            </ul>
+            <div class="chips tech-row"><span class="chip">Java 8</span><span class="chip">SOAP / REST</span><span class="chip">Kafka</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Jenkins</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="commerce">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">03 // Order Journey</div>
+        <h2>The order pipeline <span class="grad">I engineered.</span></h2>
+        <p>Every stage below is a system I designed, built or optimized.</p>
+      </div>
+      <div class="flow glass" style="--steps:6;padding:50px 20px 40px" data-reveal="zoom">
+        <span class="flow-packet"></span>
+        <div class="flow-node"><div class="orb">🛒</div><h4>Order Placed</h4><p>Captured by OMS for consignment &amp; inventory</p></div>
+        <div class="flow-node"><div class="orb">🧭</div><h4>Smart Routing</h4><p>Picks fastest, cheapest fulfilment route</p></div>
+        <div class="flow-node"><div class="orb">🏭</div><h4>WMS + GRN</h4><p>Inward, QC inspection, pick &amp; pack</p></div>
+        <div class="flow-node"><div class="orb">⚖️</div><h4>Vmeasure</h4><p>Dimensional weight &amp; slab billing</p></div>
+        <div class="flow-node"><div class="orb">🚚</div><h4>3PL Ship</h4><p>Real-time manifest &amp; tracking sync</p></div>
+        <div class="flow-node"><div class="orb">🏠</div><h4>Delivered</h4><p>Ledger, reports &amp; reconciliation</p></div>
+      </div>
+
+      <div class="cap-grid" style="margin-top:28px">
+        <div class="flip" data-reveal><div class="flip-inner">
+          <div class="flip-face glass"><div class="ico">🛒</div><h4>Order Management</h4><p>Consignment &amp; Inventory OMS modules on Java + Hibernate.</p><div class="flip-hint">HOVER / TAP ↻</div></div>
+          <div class="flip-face glass back"><h4>Impact</h4><p>More throughput, cleaner data across brands.</p><div class="metric">+70% productivity</div></div>
+        </div></div>
+        <div class="flip" data-reveal style="--d:.08s"><div class="flip-inner">
+          <div class="flip-face glass"><div class="ico">🧭</div><h4>Order Routing</h4><p>Re-engineered route-selection algorithms for delivery.</p><div class="flip-hint">HOVER / TAP ↻</div></div>
+          <div class="flip-face glass back"><h4>Impact</h4><p>40% faster processing and 15% cheaper shipping.</p><div class="metric">−15% cost</div></div>
+        </div></div>
+        <div class="flip" data-reveal style="--d:.16s"><div class="flip-inner">
+          <div class="flip-face glass"><div class="ico">🏭</div><h4>WMS &amp; GRN</h4><p>Automated inventory movement, GRN linked with QC inspection.</p><div class="flip-hint">HOVER / TAP ↻</div></div>
+          <div class="flip-face glass back"><h4>Impact</h4><p>Faster receiving and a more productive floor team.</p><div class="metric">+70% efficiency</div></div>
+        </div></div>
+        <div class="flip" data-reveal style="--d:.24s"><div class="flip-inner">
+          <div class="flip-face glass"><div class="ico">🔄</div><h4>Inventory Sync</h4><p>Reconciliation &amp; synchronization across channels and systems.</p><div class="flip-hint">HOVER / TAP ↻</div></div>
+          <div class="flip-face glass back"><h4>Impact</h4><p>90% fewer data-entry errors, 60% less manual effort.</p><div class="metric">−50% stockouts</div></div>
+        </div></div>
+        <div class="flip" data-reveal style="--d:.32s"><div class="flip-inner">
+          <div class="flip-face glass"><div class="ico">⚖️</div><h4>Weight &amp; Billing</h4><p>Vmeasure integration + weight-dimension fraud checks.</p><div class="flip-hint">HOVER / TAP ↻</div></div>
+          <div class="flip-face glass back"><h4>Impact</h4><p>Accurate slab-based charges and trustworthy inventory data.</p><div class="metric">+35% billing accuracy</div></div>
+        </div></div>
+        <div class="flip" data-reveal style="--d:.4s"><div class="flip-inner">
+          <div class="flip-face glass"><div class="ico">♻️</div><h4>B2B Recalls</h4><p>Product-recall workflows with full batch traceability.</p><div class="flip-hint">HOVER / TAP ↻</div></div>
+          <div class="flip-face glass back"><h4>Impact</h4><p>Every unit traceable from inward to recall.</p><div class="metric">+73% traceability</div></div>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">04 // Stack</div>
+        <h2>The toolkit behind <span class="grad">millions of orders.</span></h2>
+        <p>Drag or hover the sphere to spin it.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="sphere" data-reveal="zoom" data-tags="Java,Spring Boot,Hibernate,Microservices,REST APIs,Kafka,RabbitMQ,SQS,MongoDB,MySQL,Redis,Cassandra,DynamoDB,Elasticsearch,AWS,GCP,Azure,Docker,Kubernetes,Helm,Jenkins,GitHub Actions,JWT,OMS,WMS,3PL,GRN,Order Routing,Load Balancing,JUnit,Mockito,Postman,Memcached,Git"></div>
+        <div class="skill-groups">
+          <div class="skill-group glass" data-reveal="right"><h4>Languages &amp; Frameworks</h4><div class="chips"><span class="chip">Java</span><span class="chip">Perl</span><span class="chip">Spring Boot</span><span class="chip">Spring MVC</span><span class="chip">Spring Security</span><span class="chip">Hibernate</span><span class="chip">REST / SOAP</span><span class="chip">Python · Go · JS</span></div></div>
+          <div class="skill-group glass" data-reveal="right" style="--d:.08s"><h4>Commerce Domains</h4><div class="chips"><span class="chip">OMS</span><span class="chip">WMS</span><span class="chip">GRN / QC</span><span class="chip">3PL Integration</span><span class="chip">Order Routing</span><span class="chip">Inventory Ledger</span><span class="chip">B2B Recalls</span></div></div>
+          <div class="skill-group glass" data-reveal="right" style="--d:.16s"><h4>Data, Messaging &amp; Caching</h4><div class="chips"><span class="chip">MongoDB</span><span class="chip">MySQL</span><span class="chip">Cassandra</span><span class="chip">Redis</span><span class="chip">DynamoDB</span><span class="chip">Elasticsearch</span><span class="chip">Kafka</span><span class="chip">RabbitMQ</span><span class="chip">SQS</span></div></div>
+          <div class="skill-group glass" data-reveal="right" style="--d:.24s"><h4>Cloud &amp; DevOps</h4><div class="chips"><span class="chip">AWS</span><span class="chip">GCP</span><span class="chip">Azure</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Helm</span><span class="chip">Jenkins</span><span class="chip">GitHub Actions</span><span class="chip">GitLab</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="profiles">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">05 // Problem Solving</div>
+        <h2>Sharpened on <span class="grad">850+ problems.</span></h2>
+      </div>
+      <div class="code-grid">
+        <div class="code-card glass tilt" data-tilt="12" data-reveal><div class="ring"><svg viewBox="0 0 110 110"><circle class="track" cx="55" cy="55" r="48"/><circle class="val" data-p=".9" cx="55" cy="55" r="48"/></svg><div class="ring-ico">🧩</div></div><div class="big grad" data-count="450" data-suffix="+">0</div><div class="plat">LeetCode</div><div class="sub">problems solved</div></div>
+        <div class="code-card glass tilt" data-tilt="12" data-reveal style="--d:.08s"><div class="ring"><svg viewBox="0 0 110 110"><circle class="track" cx="55" cy="55" r="48"/><circle class="val" data-p=".8" cx="55" cy="55" r="48"/></svg><div class="ring-ico">🌿</div></div><div class="big grad" data-count="400" data-suffix="+">0</div><div class="plat">GeeksforGeeks</div><div class="sub">problems solved</div></div>
+        <div class="code-card glass tilt" data-tilt="12" data-reveal style="--d:.16s"><div class="ring"><svg viewBox="0 0 110 110"><circle class="track" cx="55" cy="55" r="48"/><circle class="val" data-p="1" cx="55" cy="55" r="48"/></svg><div class="ring-ico">👨‍🍳</div></div><div class="big grad">5★</div><div class="plat">CodeChef</div><div class="sub">rating</div></div>
+        <div class="code-card glass tilt" data-tilt="12" data-reveal style="--d:.24s"><div class="ring"><svg viewBox="0 0 110 110"><circle class="track" cx="55" cy="55" r="48"/><circle class="val" data-p="1" cx="55" cy="55" r="48"/></svg><div class="ring-ico">🏅</div></div><div class="big grad">5★</div><div class="plat">HackerRank</div><div class="sub">gold badges</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">06 // Education &amp; Journey</div>
+        <h2>Foundations &amp; <span class="grad">early wins.</span></h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card glass tilt" data-tilt="8" data-reveal="left">
+          <div class="cgpa"><span>9.1<small>CGPA</small></span></div>
+          <h3>Vel Tech University</h3>
+          <div class="deg">B.Tech, Computer Science Engineering · 2018 – 2022 · Chennai</div>
+          <ul class="bullets">
+            <li>Organised a <b>coding competition</b> during the Codigo Hackathon (CSE Dept.).</li>
+            <li><b>2nd prize</b> with the football team at the university Science Fest.</li>
+            <li>Participated in multiple workshops, webinars &amp; hackathons.</li>
+          </ul>
+        </div>
+        <div class="edu-card glass tilt" data-tilt="8" data-reveal="right">
+          <h3>Building for the web early 🌐</h3>
+          <div class="deg">Hands-on product work before graduation.</div>
+          <ul class="bullets">
+            <li><b>National Engineering Olympiad</b> — Interactive website + Razorpay checkout with real-time DB updates (React, Node.js, SQL).</li>
+            <li><b>The Sparks Foundation</b> — Payment-gateway integration.</li>
+            <li><b>Crio.Do</b> — Top 100 of 20,000+ in the web-dev externship (Linux, AWS, Git).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="journey">
+        <div class="j-card glass" data-reveal><div class="when">Oct 2021 – Jan 2022</div><h4>Trainee Software Engineer</h4><div class="org">TekIP Knowledge Consulting · Noida</div></div>
+        <div class="j-card glass" data-reveal style="--d:.08s"><div class="when">Jan 2021</div><h4>Web Developer</h4><div class="org">Crio.Do</div><p>Top 100 / 20,000+</p></div>
+        <div class="j-card glass" data-reveal style="--d:.16s"><div class="when">Oct – Nov 2020</div><h4>Web Developer Intern</h4><div class="org">National Engineering Olympiad</div><p>React · Node.js · Razorpay</p></div>
+        <div class="j-card glass" data-reveal style="--d:.24s"><div class="when">Jun – Jul 2019</div><h4>Summer Intern</h4><div class="org">BSNL Ltd · Jamshedpur</div><p>TCP/IP networking</p></div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:40px">
+      <div class="section-head" data-reveal><div class="eyebrow">// More views</div><h2 style="font-size:clamp(1.6rem,3.5vw,2.4rem)">Explore other <span class="grad">editions.</span></h2></div>
+      <div class="variants">
+        <a class="variant glass" href="../Fintech%20portfolio/index.html" data-reveal><div class="ico">💳</div><h4>FinTech Edition</h4><p style="color:var(--muted);font-size:.9rem">Wallets, ledgers &amp; payments.</p><span>open →</span></a>
+        <a class="variant glass current" data-reveal style="--d:.1s"><div class="ico">📦</div><h4>E-commerce Edition</h4><p style="color:var(--muted);font-size:.9rem">You are here.</p><span>● current</span></a>
+        <a class="variant glass" href="../Senior%20Software%20Engineer%20Portfolio/index.html" data-reveal style="--d:.2s"><div class="ico">🧠</div><h4>Senior Engineer Edition</h4><p style="color:var(--muted);font-size:.9rem">Architecture, DevSecOps &amp; modernization.</p><span>open →</span></a>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-head" data-reveal>
+        <div class="eyebrow">07 // Contact</div>
+        <h2>Scaling your <span class="grad">commerce stack?</span></h2>
+        <p>Let's talk OMS, WMS, logistics or anything that needs to ship faster.</p>
+      </div>
+      <div class="contact-wrap">
+        <div class="contact-cards">
+          <a class="c-card glass" href="mailto:anubhuv007@gmail.com" data-copy="anubhuv007@gmail.com" data-reveal="left"><span class="c-ico"><svg class="icon"><use href="#i-mail"/></svg></span><span><small>Email</small><strong>anubhuv007@gmail.com</strong></span></a>
+          <a class="c-card glass" href="tel:+918754576548" data-copy="+91 8754576548" data-reveal="left" style="--d:.08s"><span class="c-ico"><svg class="icon"><use href="#i-phone"/></svg></span><span><small>Phone</small><strong>+91 87545 76548</strong></span></a>
+          <a class="c-card glass" href="https://www.linkedin.com/in/anubhuv-kumar-43a9241b1/" target="_blank" rel="noopener" data-reveal="left" style="--d:.16s"><span class="c-ico"><svg class="icon"><use href="#i-linkedin"/></svg></span><span><small>LinkedIn</small><strong>in/anubhuv-kumar</strong></span></a>
+          <a class="c-card glass" href="https://github.com/anubhav2103" target="_blank" rel="noopener" data-reveal="left" style="--d:.24s"><span class="c-ico"><svg class="icon"><use href="#i-github"/></svg></span><span><small>GitHub</small><strong>github.com/anubhav2103</strong></span></a>
+        </div>
+        <form class="contact-form glass" id="contactForm" data-reveal="right">
+          <div class="form-row">
+            <div class="field"><input id="f-name" name="name" placeholder=" " required /><label for="f-name">Your name</label></div>
+            <div class="field"><input id="f-email" name="email" type="email" placeholder=" " /><label for="f-email">Your email</label></div>
+          </div>
+          <div class="field"><input id="f-subject" name="subject" placeholder=" " /><label for="f-subject">Subject</label></div>
+          <div class="field"><textarea id="f-msg" name="message" placeholder=" " required></textarea><label for="f-msg">Message</label></div>
+          <button class="btn btn-primary" type="submit" data-magnetic style="justify-self:start"><svg class="icon"><use href="#i-send"/></svg>Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© <span data-year></span> Anubhuv Kumar · E-commerce Edition · Crafted with Three.js</div>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/anubhuv-kumar-43a9241b1/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a>
+      <a href="https://github.com/anubhav2103" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon"><use href="#i-github"/></svg></a>
+      <a href="mailto:anubhuv007@gmail.com" aria-label="Email"><svg class="icon"><use href="#i-mail"/></svg></a>
+    </div>
+  </footer>
+  <button class="to-top" aria-label="Back to top"><svg class="icon"><use href="#i-up"/></svg></button>
+
+  <script src="assets/core.js"></script>
+  <script type="module" src="assets/scene.js"></script>
+</body>
+</html>
